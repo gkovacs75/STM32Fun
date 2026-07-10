@@ -123,30 +123,32 @@ int main(void)
 
 	printf("Blink Delay: %u. \r\n", blinkDelay);
 
-	uint32_t now = 0;
+	uint32_t msSinceReset = 0;
 	uint32_t nextBlink = blinkDelay;
+	uint32_t nextTick = 0;
 	uint32_t loop = 0;
 
 	while (1)
 	{
+		msSinceReset = uwTick; // number of milliseconds since power on or reset
 
-		// uwTick contains the number of milliseconds since power on or reset
-		now = uwTick;
-
-		//now = HAL_GetTick();
-
-		if (now >= nextBlink)
+		if (msSinceReset >= nextBlink)
 		{
-			printf("Tick %lu (loop = %lu)\r\n", now / 1000, loop);
-
 			HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 
-			nextBlink = now + blinkDelay;
-
-			loop = 0;
+			nextBlink = msSinceReset + blinkDelay;
 		}
 
-		if (buttonPressed == 1)
+		if (msSinceReset >= nextTick)
+		{
+			printf("Tick %lu (loop = %lu)\r\n", msSinceReset / 1000, loop);
+
+			loop = 0;
+
+			nextTick = msSinceReset + 1000;
+		}
+
+		if (buttonPressed)
 		{
 			delaysIndex++;
 
