@@ -113,7 +113,7 @@ int main(void)
 	MX_GPIO_Init();
 	MX_USART2_UART_Init();
 	/* USER CODE BEGIN 2 */
-	printf("Starting...\r\n");
+	printf("Starting Blink1...\r\n");
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
