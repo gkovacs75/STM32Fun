@@ -7,23 +7,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   1 .text         000034cc  080001d0  080001d0  000011d0  2**4
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       0000009c  0800369c  0800369c  0000469c  2**2
+  2 .rodata       000000a0  0800369c  0800369c  0000469c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08003738  08003738  00005078  2**0
+  3 .ARM.extab    00000000  0800373c  0800373c  00005078  2**0
                   CONTENTS, READONLY
-  4 .ARM          00000008  08003738  08003738  00004738  2**2
+  4 .ARM          00000008  0800373c  0800373c  0000473c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  08003740  08003740  00005078  2**0
+  5 .preinit_array 00000000  08003744  08003744  00005078  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08003740  08003740  00004740  2**2
+  6 .init_array   00000004  08003744  08003744  00004744  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  7 .fini_array   00000004  08003744  08003744  00004744  2**2
+  7 .fini_array   00000004  08003748  08003748  00004748  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  8 .data         00000078  20000000  08003748  00005000  2**2
+  8 .data         00000078  20000000  0800374c  00005000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          000001c0  20000078  080037c0  00005078  2**2
+  9 .bss          000001c0  20000078  080037c4  00005078  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  20000238  080037c0  00005238  2**0
+ 10 ._user_heap_stack 00000600  20000238  080037c4  00005238  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00005078  2**0
                   CONTENTS, READONLY
@@ -520,7 +520,7 @@ int main(void)
 	MX_USART2_UART_Init();
  8000642:	f000 f8eb 	bl	800081c <MX_USART2_UART_Init>
 	/* USER CODE BEGIN 2 */
-	printf("Starting...\r\n");
+	printf("Starting Blink1...\r\n");
  8000646:	4831      	ldr	r0, [pc, #196]	@ (800070c <main+0xdc>)
  8000648:	f002 f9be 	bl	80029c8 <puts>
 	/* USER CODE END 2 */
@@ -667,14 +667,14 @@ int main(void)
  800070c:	0800369c 	.word	0x0800369c
  8000710:	20000000 	.word	0x20000000
  8000714:	200000de 	.word	0x200000de
- 8000718:	080036ac 	.word	0x080036ac
+ 8000718:	080036b0 	.word	0x080036b0
  800071c:	200000e8 	.word	0x200000e8
  8000720:	40020000 	.word	0x40020000
  8000724:	10624dd3 	.word	0x10624dd3
- 8000728:	080036c0 	.word	0x080036c0
+ 8000728:	080036c4 	.word	0x080036c4
  800072c:	200000dc 	.word	0x200000dc
  8000730:	200000e0 	.word	0x200000e0
- 8000734:	080036d8 	.word	0x080036d8
+ 8000734:	080036dc 	.word	0x080036dc
 
 08000738 <SystemClock_Config>:
 /**
@@ -1708,7 +1708,7 @@ LoopFillZerobss:
   ldr r1, =_edata
  8000c0c:	20000078 	.word	0x20000078
   ldr r2, =_sidata
- 8000c10:	08003748 	.word	0x08003748
+ 8000c10:	0800374c 	.word	0x0800374c
   ldr r2, =_sbss
  8000c14:	20000078 	.word	0x20000078
   ldr r4, =_ebss
@@ -3340,7 +3340,7 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(const RCC_ClkInitTypeDef  *RCC_ClkInitStru
  800153e:	bf00      	nop
  8001540:	40023c00 	.word	0x40023c00
  8001544:	40023800 	.word	0x40023800
- 8001548:	080036ec 	.word	0x080036ec
+ 8001548:	080036f0 	.word	0x080036f0
  800154c:	20000010 	.word	0x20000010
  8001550:	20000014 	.word	0x20000014
 
@@ -3388,7 +3388,7 @@ uint32_t HAL_RCC_GetPCLK1Freq(void)
  8001588:	4618      	mov	r0, r3
  800158a:	bd80      	pop	{r7, pc}
  800158c:	40023800 	.word	0x40023800
- 8001590:	080036fc 	.word	0x080036fc
+ 8001590:	08003700 	.word	0x08003700
 
 08001594 <HAL_RCC_GetPCLK2Freq>:
   * @note   Each time PCLK2 changes, this function must be called to update the
@@ -3414,7 +3414,7 @@ uint32_t HAL_RCC_GetPCLK2Freq(void)
  80015b0:	4618      	mov	r0, r3
  80015b2:	bd80      	pop	{r7, pc}
  80015b4:	40023800 	.word	0x40023800
- 80015b8:	080036fc 	.word	0x080036fc
+ 80015b8:	08003700 	.word	0x08003700
 
 080015bc <HAL_RCC_GetSysClockFreq>:
   *
@@ -6498,10 +6498,10 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  8002c5e:	4798      	blx	r3
  8002c60:	3601      	adds	r6, #1
  8002c62:	e7f2      	b.n	8002c4a <__libc_init_array+0x1e>
- 8002c64:	08003740 	.word	0x08003740
- 8002c68:	08003740 	.word	0x08003740
- 8002c6c:	08003740 	.word	0x08003740
- 8002c70:	08003744 	.word	0x08003744
+ 8002c64:	08003744 	.word	0x08003744
+ 8002c68:	08003744 	.word	0x08003744
+ 8002c6c:	08003744 	.word	0x08003744
+ 8002c70:	08003748 	.word	0x08003748
 
 08002c74 <__retarget_lock_init_recursive>:
  8002c74:	4770      	bx	lr
@@ -6999,11 +6999,11 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  80030cc:	f000 f87a 	bl	80031c4 <_printf_i>
  80030d0:	e7e5      	b.n	800309e <_vfiprintf_r+0x1de>
  80030d2:	bf00      	nop
- 80030d4:	08003704 	.word	0x08003704
- 80030d8:	0800370e 	.word	0x0800370e
+ 80030d4:	08003708 	.word	0x08003708
+ 80030d8:	08003712 	.word	0x08003712
  80030dc:	00000000 	.word	0x00000000
  80030e0:	08002e9b 	.word	0x08002e9b
- 80030e4:	0800370a 	.word	0x0800370a
+ 80030e4:	0800370e 	.word	0x0800370e
 
 080030e8 <_printf_common>:
  80030e8:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
@@ -7337,8 +7337,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  8003400:	f104 0619 	add.w	r6, r4, #25
  8003404:	e7f5      	b.n	80033f2 <_printf_i+0x22e>
  8003406:	bf00      	nop
- 8003408:	08003715 	.word	0x08003715
- 800340c:	08003726 	.word	0x08003726
+ 8003408:	08003719 	.word	0x08003719
+ 800340c:	0800372a 	.word	0x0800372a
 
 08003410 <__sflush_r>:
  8003410:	f9b1 200c 	ldrsh.w	r2, [r1, #12]
