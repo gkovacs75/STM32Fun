@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include<stdlib.h>
+#include <stdlib.h>
 #include <stdio.h>
 /* USER CODE END Includes */
 
@@ -132,7 +132,6 @@ int main(void)
 
 	uint32_t msSinceReset = 0;
 	uint32_t nextTick = 0;
-	uint32_t loop = 0;
 
 	while (1)
 	{
