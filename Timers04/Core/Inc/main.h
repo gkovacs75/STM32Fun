@@ -59,7 +59,7 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define SAMPLE_RANGE 3000
+#define SAMPLE_RANGE 1500
 
 /* USER CODE BEGIN Private defines */
 
