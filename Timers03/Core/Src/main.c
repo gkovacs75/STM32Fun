@@ -100,7 +100,7 @@ int main(void)
 	MX_TIM4_Init();
 	MX_USART2_UART_Init();
 	/* USER CODE BEGIN 2 */
-	printf("\r\n\r\n\r\nStarting Timers03...\r\n");
+	printf("\r\n\r\n\r\nStarting Timers03-Edited...\r\n");
 
 	// Start the timer
 	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
