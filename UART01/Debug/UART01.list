@@ -509,11 +509,12 @@ void led_flash()
 {
  8000650:	b580      	push	{r7, lr}
  8000652:	af00      	add	r7, sp, #0
-	HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET); // Turn on LED
  8000654:	2200      	movs	r2, #0
  8000656:	2120      	movs	r1, #32
  8000658:	4808      	ldr	r0, [pc, #32]	@ (800067c <led_flash+0x2c>)
  800065a:	f001 fc93 	bl	8001f84 <HAL_GPIO_WritePin>
+
 	if (__HAL_TIM_GET_COUNTER(&htim6) == 1)
  800065e:	4b08      	ldr	r3, [pc, #32]	@ (8000680 <led_flash+0x30>)
  8000660:	681b      	ldr	r3, [r3, #0]
@@ -521,7 +522,7 @@ void led_flash()
  8000664:	2b01      	cmp	r3, #1
  8000666:	d103      	bne.n	8000670 <led_flash+0x20>
 	{
-		HAL_TIM_Base_Start_IT(&htim6);
+		HAL_TIM_Base_Start_IT(&htim6); // Start Counter
  8000668:	4805      	ldr	r0, [pc, #20]	@ (8000680 <led_flash+0x30>)
  800066a:	f002 fb03 	bl	8002c74 <HAL_TIM_Base_Start_IT>
 	}
