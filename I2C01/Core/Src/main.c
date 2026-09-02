@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include <string.h>
+#include "HD44780U_Helpers.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,7 +66,7 @@ static void MX_I2C1_Init(void);
 /* USER CODE BEGIN 0 */
 
 // Single nibble with EN pulse (used for init)
-static void lcd_write_nibble(uint8_t nibble, uint8_t rs)
+void lcd_write_nibble(uint8_t nibble, uint8_t rs)
 {
 	uint8_t data = LCD_BACKLIGHT | rs | (nibble << 4);
 	uint8_t buf[2] =
@@ -80,13 +81,13 @@ static void lcd_write_nibble(uint8_t nibble, uint8_t rs)
 }
 
 // Full byte in 4-bit mode: two nibbles, each with EN pulse
-static void lcd_write_byte(uint8_t byte, uint8_t rs)
+void lcd_write_byte(uint8_t byte, uint8_t rs)
 {
 	lcd_write_nibble((byte >> 4) & 0x0F, rs);
 	lcd_write_nibble(byte & 0x0F, rs);
 }
 
-static void lcd_init(void)
+void lcd_init(void)
 {
 	HAL_Delay(50);  // wait for LCD power-on stabilization
 
@@ -111,19 +112,19 @@ static void lcd_init(void)
 	lcd_write_byte(0x0C, 0);  // Display on, cursor off
 }
 
-static void lcd_clear()
+void lcd_clear()
 {
 	lcd_write_byte(0x01, 0);  // RS=0 → command
 	HAL_Delay(2);
 }
 
-static void lcd_set_cursor(uint8_t line, uint8_t col)
+void lcd_set_cursor(uint8_t line, uint8_t col)
 {
 	uint8_t addr = (line == 0) ? col : (0x40 + col);
 	lcd_write_byte(0x80 | addr, 0);
 }
 
-static void lcd_print(const char *str)
+void lcd_print(const char *str)
 {
 	while (*str)
 	{
@@ -217,7 +218,7 @@ int main(void)
 	MX_USART2_UART_Init();
 	MX_I2C1_Init();
 	/* USER CODE BEGIN 2 */
-	printf("\r\n\r\n\r\nStarting I2C 01 v4...\r\n");
+	printf("\r\n\r\n\r\nStarting I2C 01 v7...\r\n");
 
 	ScanU2CAddresses();
 
