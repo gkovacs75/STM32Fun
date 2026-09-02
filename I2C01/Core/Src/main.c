@@ -69,9 +69,14 @@ static void lcd_write_nibble(uint8_t nibble, uint8_t rs)
 {
 	uint8_t data = LCD_BACKLIGHT | rs | (nibble << 4);
 	uint8_t buf[2] =
-	{ data | LCD_ENABLE, data };
+			{ data | LCD_ENABLE, data };
 
-	HAL_I2C_Master_Transmit(&hi2c1, LCD_ADDRESS, buf, 2, 100);
+	HAL_StatusTypeDef status = HAL_I2C_Master_Transmit(&hi2c1, LCD_ADDRESS, buf, 2, 100);
+
+	if (status != HAL_OK)
+	{
+		printf("I2C failed — no ACK from device at 0x27\r\n");
+	}
 }
 
 // Full byte in 4-bit mode: two nibbles, each with EN pulse
@@ -114,8 +119,8 @@ static void lcd_clear()
 
 static void lcd_set_cursor(uint8_t line, uint8_t col)
 {
-    uint8_t addr = (line == 0) ? col : (0x40 + col);
-    lcd_write_byte(0x80 | addr, 0);
+	uint8_t addr = (line == 0) ? col : (0x40 + col);
+	lcd_write_byte(0x80 | addr, 0);
 }
 
 static void lcd_print(const char *str)
@@ -124,6 +129,30 @@ static void lcd_print(const char *str)
 	{
 		lcd_write_byte(*str++, LCD_REGISTER_SELECT);  // RS=1 → data
 	}
+}
+
+void ScanU2CAddresses()
+{
+	printf("\r\n\nStarting I2C Scan...\r\n");
+
+	for (uint8_t i = 0; i < 128; i++)
+	{
+		if (HAL_I2C_IsDeviceReady(&hi2c1, (uint16_t) (i << 1), 3, 5) == HAL_OK)
+		{
+			printf("%2X ", i);
+		}
+		else
+		{
+			printf("-- ");
+		}
+
+		if (i > 0 && (i + 1) % 16 == 0)
+		{
+			printf("\r\n");
+		}
+	}
+
+	printf("\r\nScan Complete...\r\n\r\n\r\n");
 }
 
 int _write(int file, char *ptr, int len)
@@ -188,7 +217,9 @@ int main(void)
 	MX_USART2_UART_Init();
 	MX_I2C1_Init();
 	/* USER CODE BEGIN 2 */
-	printf("\r\n\r\n\r\nStarting I2C 01 v2...\r\n");
+	printf("\r\n\r\n\r\nStarting I2C 01 v4...\r\n");
+
+	ScanU2CAddresses();
 
 	lcd_init();
 
@@ -222,7 +253,7 @@ int main(void)
 			lcd_clear();
 			snprintf(buf, sizeof(buf), "Tick: %lu", now / 1000);
 			lcd_print(buf);
-			lcd_set_cursor(1,0);
+			lcd_set_cursor(1, 0);
 			snprintf(buf, sizeof(buf), "Loop Count: %lu", loop_cnt);
 			lcd_print(buf);
 
