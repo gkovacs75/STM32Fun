@@ -32,10 +32,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define LCD_ADDR    (0x27 << 1)
-#define LCD_RS      0x01
-#define LCD_EN      0x04
-#define LCD_BL      0x08
+#define LCD_ADDRESS        (0x27 << 1)
+#define LCD_REGISTER_SELECT 0x01
+#define LCD_ENABLE          0x04
+#define LCD_BACKLIGHT       0x08
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -67,11 +67,11 @@ static void MX_I2C1_Init(void);
 // Single nibble with EN pulse (used for init)
 static void lcd_write_nibble(uint8_t nibble, uint8_t rs)
 {
-	uint8_t data = LCD_BL | rs | (nibble << 4);
+	uint8_t data = LCD_BACKLIGHT | rs | (nibble << 4);
 	uint8_t buf[2] =
-	{ data | LCD_EN, data };
+	{ data | LCD_ENABLE, data };
 
-	HAL_I2C_Master_Transmit(&hi2c1, LCD_ADDR, buf, 2, 100);
+	HAL_I2C_Master_Transmit(&hi2c1, LCD_ADDRESS, buf, 2, 100);
 }
 
 // Full byte in 4-bit mode: two nibbles, each with EN pulse
@@ -122,7 +122,7 @@ static void lcd_print(const char *str)
 {
 	while (*str)
 	{
-		lcd_write_byte(*str++, LCD_RS);  // RS=1 → data
+		lcd_write_byte(*str++, LCD_REGISTER_SELECT);  // RS=1 → data
 	}
 }
 
@@ -188,7 +188,7 @@ int main(void)
 	MX_USART2_UART_Init();
 	MX_I2C1_Init();
 	/* USER CODE BEGIN 2 */
-	printf("\r\n\r\n\r\nStarting I2C 01...\r\n");
+	printf("\r\n\r\n\r\nStarting I2C 01 v2...\r\n");
 
 	lcd_init();
 

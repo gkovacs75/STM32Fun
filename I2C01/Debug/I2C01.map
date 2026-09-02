@@ -3292,72 +3292,72 @@ LOAD C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.exte
 .iplt           0x0800455c        0x0
  .iplt          0x0800455c        0x0 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.rodata         0x0800455c       0xa4
+.rodata         0x0800455c       0xa8
                 0x0800455c                        . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x0800455c       0x58 ./Core/Src/main.o
+ .rodata        0x0800455c       0x5c ./Core/Src/main.o
  *(.rodata*)
  .rodata.AHBPrescTable
-                0x080045b4       0x10 ./Core/Src/system_stm32f4xx.o
-                0x080045b4                AHBPrescTable
+                0x080045b8       0x10 ./Core/Src/system_stm32f4xx.o
+                0x080045b8                AHBPrescTable
  .rodata.APBPrescTable
-                0x080045c4        0x8 ./Core/Src/system_stm32f4xx.o
-                0x080045c4                APBPrescTable
+                0x080045c8        0x8 ./Core/Src/system_stm32f4xx.o
+                0x080045c8                APBPrescTable
  .rodata._svfprintf_r.str1.1
-                0x080045cc       0x33 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
+                0x080045d0       0x33 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
                                  0x11 (size before relaxing)
  .rodata._vfprintf_r.str1.1
-                0x080045ff       0x11 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf.o)
+                0x08004603       0x11 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf.o)
  .rodata._printf_i.str1.1
-                0x080045ff       0x22 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
-                0x08004624                        . = ALIGN (0x4)
- *fill*         0x080045ff        0x1 
+                0x08004603       0x22 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x08004628                        . = ALIGN (0x4)
+ *fill*         0x08004603        0x1 
 
-.ARM.extab      0x08004600        0x0
-                0x08004600                        . = ALIGN (0x4)
+.ARM.extab      0x08004604        0x0
+                0x08004604                        . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x08004600                        . = ALIGN (0x4)
+                0x08004604                        . = ALIGN (0x4)
 
-.ARM            0x08004600        0x8
-                0x08004600                        . = ALIGN (0x4)
-                0x08004600                        __exidx_start = .
+.ARM            0x08004604        0x8
+                0x08004604                        . = ALIGN (0x4)
+                0x08004604                        __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x08004600        0x8 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memchr.o)
- .ARM.exidx     0x08004608        0x0 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+ .ARM.exidx     0x08004604        0x8 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memchr.o)
+ .ARM.exidx     0x0800460c        0x0 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
                                   0x8 (size before relaxing)
-                0x08004608                        __exidx_end = .
-                0x08004608                        . = ALIGN (0x4)
+                0x0800460c                        __exidx_end = .
+                0x0800460c                        . = ALIGN (0x4)
 
-.preinit_array  0x08004608        0x0
-                0x08004608                        . = ALIGN (0x4)
-                0x08004608                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x0800460c        0x0
+                0x0800460c                        . = ALIGN (0x4)
+                0x0800460c                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x08004608                        PROVIDE (__preinit_array_end = .)
-                0x08004608                        . = ALIGN (0x4)
+                0x0800460c                        PROVIDE (__preinit_array_end = .)
+                0x0800460c                        . = ALIGN (0x4)
 
-.init_array     0x08004608        0x4
-                0x08004608                        . = ALIGN (0x4)
-                0x08004608                        PROVIDE (__init_array_start = .)
+.init_array     0x0800460c        0x4
+                0x0800460c                        . = ALIGN (0x4)
+                0x0800460c                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x08004608        0x4 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
-                0x0800460c                        PROVIDE (__init_array_end = .)
-                0x0800460c                        . = ALIGN (0x4)
+ .init_array    0x0800460c        0x4 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x08004610                        PROVIDE (__init_array_end = .)
+                0x08004610                        . = ALIGN (0x4)
 
-.fini_array     0x0800460c        0x4
-                0x0800460c                        . = ALIGN (0x4)
+.fini_array     0x08004610        0x4
+                0x08004610                        . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x0800460c        0x4 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .fini_array    0x08004610        0x4 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x08004610                        . = ALIGN (0x4)
-                0x08004610                        _sidata = LOADADDR (.data)
+                0x08004614                        . = ALIGN (0x4)
+                0x08004614                        _sidata = LOADADDR (.data)
 
-.rel.dyn        0x08004610        0x0
- .rel.iplt      0x08004610        0x0 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+.rel.dyn        0x08004614        0x0
+ .rel.iplt      0x08004614        0x0 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.data           0x20000000       0x68 load address 0x08004610
+.data           0x20000000       0x68 load address 0x08004614
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -3385,11 +3385,11 @@ LOAD C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.exte
                 0x20000068                        . = ALIGN (0x4)
                 0x20000068                        _edata = .
 
-.igot.plt       0x20000068        0x0 load address 0x08004678
+.igot.plt       0x20000068        0x0 load address 0x0800467c
  .igot.plt      0x20000068        0x0 C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
                 0x20000068                        . = ALIGN (0x4)
 
-.bss            0x20000068      0x20c load address 0x08004678
+.bss            0x20000068      0x20c load address 0x0800467c
                 0x20000068                        _sbss = .
                 0x20000068                        __bss_start__ = _sbss
  *(.bss)
@@ -3429,7 +3429,7 @@ LOAD C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.exte
                 0x20000274                        __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x20000274      0x604 load address 0x08004678
+                0x20000274      0x604 load address 0x0800467c
                 0x20000278                        . = ALIGN (0x8)
  *fill*         0x20000274        0x4 
                 [!provide]                        PROVIDE (end = .)
@@ -3785,23 +3785,23 @@ LOAD C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_line    0x0000a763     0x1508 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
  .debug_line    0x0000bc6b     0x2584 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
 
-.debug_str      0x00000000    0xccaf5
- .debug_str     0x00000000    0xccaf5 ./Core/Src/main.o
-                              0xc82a7 (size before relaxing)
- .debug_str     0x000ccaf5    0xc4857 ./Core/Src/stm32f4xx_hal_msp.o
- .debug_str     0x000ccaf5    0xc3ffc ./Core/Src/stm32f4xx_it.o
- .debug_str     0x000ccaf5     0x9944 ./Core/Src/syscalls.o
- .debug_str     0x000ccaf5     0x76ee ./Core/Src/sysmem.o
- .debug_str     0x000ccaf5    0xc414b ./Core/Src/system_stm32f4xx.o
- .debug_str     0x000ccaf5       0x66 ./Core/Startup/startup_stm32f446retx.o
- .debug_str     0x000ccaf5    0xc4d10 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
- .debug_str     0x000ccaf5    0xc4a67 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
- .debug_str     0x000ccaf5    0xc42c6 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
- .debug_str     0x000ccaf5    0xc5149 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o
- .debug_str     0x000ccaf5    0xc4323 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
- .debug_str     0x000ccaf5    0xc4584 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
- .debug_str     0x000ccaf5    0xc45b7 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
- .debug_str     0x000ccaf5    0xc4b3b ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
+.debug_str      0x00000000    0xccb10
+ .debug_str     0x00000000    0xccb10 ./Core/Src/main.o
+                              0xc82c2 (size before relaxing)
+ .debug_str     0x000ccb10    0xc4857 ./Core/Src/stm32f4xx_hal_msp.o
+ .debug_str     0x000ccb10    0xc3ffc ./Core/Src/stm32f4xx_it.o
+ .debug_str     0x000ccb10     0x9944 ./Core/Src/syscalls.o
+ .debug_str     0x000ccb10     0x76ee ./Core/Src/sysmem.o
+ .debug_str     0x000ccb10    0xc414b ./Core/Src/system_stm32f4xx.o
+ .debug_str     0x000ccb10       0x66 ./Core/Startup/startup_stm32f446retx.o
+ .debug_str     0x000ccb10    0xc4d10 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+ .debug_str     0x000ccb10    0xc4a67 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+ .debug_str     0x000ccb10    0xc42c6 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+ .debug_str     0x000ccb10    0xc5149 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o
+ .debug_str     0x000ccb10    0xc4323 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
+ .debug_str     0x000ccb10    0xc4584 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+ .debug_str     0x000ccb10    0xc45b7 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
+ .debug_str     0x000ccb10    0xc4b3b ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
 
 .comment        0x00000000       0x43
  .comment       0x00000000       0x43 ./Core/Src/main.o

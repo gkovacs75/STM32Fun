@@ -7,23 +7,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   1 .text         0000438c  080001d0  080001d0  000011d0  2**4
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       000000a4  0800455c  0800455c  0000555c  2**2
+  2 .rodata       000000a8  0800455c  0800455c  0000555c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08004600  08004600  00006068  2**0
+  3 .ARM.extab    00000000  08004604  08004604  00006068  2**0
                   CONTENTS, READONLY
-  4 .ARM          00000008  08004600  08004600  00005600  2**2
+  4 .ARM          00000008  08004604  08004604  00005604  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  08004608  08004608  00006068  2**0
+  5 .preinit_array 00000000  0800460c  0800460c  00006068  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08004608  08004608  00005608  2**2
+  6 .init_array   00000004  0800460c  0800460c  0000560c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  7 .fini_array   00000004  0800460c  0800460c  0000560c  2**2
+  7 .fini_array   00000004  08004610  08004610  00005610  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  8 .data         00000068  20000000  08004610  00006000  2**2
+  8 .data         00000068  20000000  08004614  00006000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          0000020c  20000068  08004678  00006068  2**2
+  9 .bss          0000020c  20000068  0800467c  00006068  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  20000274  08004678  00006274  2**0
+ 10 ._user_heap_stack 00000604  20000274  0800467c  00006274  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00006068  2**0
                   CONTENTS, READONLY
@@ -39,13 +39,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_line   0000e1ef  00000000  00000000  00036c97  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000ccaf5  00000000  00000000  00044e86  2**0
+ 18 .debug_str    000ccb10  00000000  00000000  00044e86  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  0011197b  2**0
+ 19 .comment      00000043  00000000  00000000  00111996  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000033d4  00000000  00000000  001119c0  2**2
+ 20 .debug_frame  000033d4  00000000  00000000  001119dc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000004a  00000000  00000000  00114d94  2**0
+ 21 .debug_line_str 0000004a  00000000  00000000  00114db0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -496,7 +496,7 @@ static void lcd_write_nibble(uint8_t nibble, uint8_t rs)
  8000636:	71fb      	strb	r3, [r7, #7]
  8000638:	4613      	mov	r3, r2
  800063a:	71bb      	strb	r3, [r7, #6]
-	uint8_t data = LCD_BL | rs | (nibble << 4);
+	uint8_t data = LCD_BACKLIGHT | rs | (nibble << 4);
  800063c:	79fb      	ldrb	r3, [r7, #7]
  800063e:	011b      	lsls	r3, r3, #4
  8000640:	b2da      	uxtb	r2, r3
@@ -512,9 +512,9 @@ static void lcd_write_nibble(uint8_t nibble, uint8_t rs)
  8000656:	733b      	strb	r3, [r7, #12]
  8000658:	7bfb      	ldrb	r3, [r7, #15]
  800065a:	737b      	strb	r3, [r7, #13]
-	{ data | LCD_EN, data };
+	{ data | LCD_ENABLE, data };
 
-	HAL_I2C_Master_Transmit(&hi2c1, LCD_ADDR, buf, 2, 100);
+	HAL_I2C_Master_Transmit(&hi2c1, LCD_ADDRESS, buf, 2, 100);
  800065c:	f107 020c 	add.w	r2, r7, #12
  8000660:	2364      	movs	r3, #100	@ 0x64
  8000662:	9300      	str	r3, [sp, #0]
@@ -698,7 +698,7 @@ static void lcd_print(const char *str)
 	while (*str)
  8000782:	e007      	b.n	8000794 <lcd_print+0x1a>
 	{
-		lcd_write_byte(*str++, LCD_RS);  // RS=1 → data
+		lcd_write_byte(*str++, LCD_REGISTER_SELECT);  // RS=1 → data
  8000784:	687b      	ldr	r3, [r7, #4]
  8000786:	1c5a      	adds	r2, r3, #1
  8000788:	607a      	str	r2, [r7, #4]
@@ -839,7 +839,7 @@ int main(void)
 	MX_I2C1_Init();
  8000832:	f000 f8e3 	bl	80009fc <MX_I2C1_Init>
 	/* USER CODE BEGIN 2 */
-	printf("\r\n\r\n\r\nStarting I2C 01...\r\n");
+	printf("\r\n\r\n\r\nStarting I2C 01 v2...\r\n");
  8000836:	4832      	ldr	r0, [pc, #200]	@ (8000900 <main+0xe4>)
  8000838:	f002 fe3c 	bl	80034b4 <puts>
 
@@ -952,9 +952,9 @@ int main(void)
  8000900:	0800455c 	.word	0x0800455c
  8000904:	20000124 	.word	0x20000124
  8000908:	10624dd3 	.word	0x10624dd3
- 800090c:	08004578 	.word	0x08004578
- 8000910:	08004598 	.word	0x08004598
- 8000914:	080045a4 	.word	0x080045a4
+ 800090c:	0800457c 	.word	0x0800457c
+ 8000910:	0800459c 	.word	0x0800459c
+ 8000914:	080045a8 	.word	0x080045a8
 
 08000918 <SystemClock_Config>:
 /**
@@ -2074,7 +2074,7 @@ LoopFillZerobss:
   ldr r1, =_edata
  8000e64:	20000068 	.word	0x20000068
   ldr r2, =_sidata
- 8000e68:	08004610 	.word	0x08004610
+ 8000e68:	08004614 	.word	0x08004614
   ldr r2, =_sbss
  8000e6c:	20000068 	.word	0x20000068
   ldr r4, =_ebss
@@ -5031,7 +5031,7 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(const RCC_ClkInitTypeDef  *RCC_ClkInitStru
  800202a:	bf00      	nop
  800202c:	40023c00 	.word	0x40023c00
  8002030:	40023800 	.word	0x40023800
- 8002034:	080045b4 	.word	0x080045b4
+ 8002034:	080045b8 	.word	0x080045b8
  8002038:	20000000 	.word	0x20000000
  800203c:	20000004 	.word	0x20000004
 
@@ -5079,7 +5079,7 @@ uint32_t HAL_RCC_GetPCLK1Freq(void)
  8002074:	4618      	mov	r0, r3
  8002076:	bd80      	pop	{r7, pc}
  8002078:	40023800 	.word	0x40023800
- 800207c:	080045c4 	.word	0x080045c4
+ 800207c:	080045c8 	.word	0x080045c8
 
 08002080 <HAL_RCC_GetPCLK2Freq>:
   * @note   Each time PCLK2 changes, this function must be called to update the
@@ -5105,7 +5105,7 @@ uint32_t HAL_RCC_GetPCLK2Freq(void)
  800209c:	4618      	mov	r0, r3
  800209e:	bd80      	pop	{r7, pc}
  80020a0:	40023800 	.word	0x40023800
- 80020a4:	080045c4 	.word	0x080045c4
+ 80020a4:	080045c8 	.word	0x080045c8
 
 080020a8 <HAL_RCC_GetSysClockFreq>:
   *
@@ -8235,10 +8235,10 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  80037b6:	4798      	blx	r3
  80037b8:	3601      	adds	r6, #1
  80037ba:	e7f2      	b.n	80037a2 <__libc_init_array+0x1e>
- 80037bc:	08004608 	.word	0x08004608
- 80037c0:	08004608 	.word	0x08004608
- 80037c4:	08004608 	.word	0x08004608
- 80037c8:	0800460c 	.word	0x0800460c
+ 80037bc:	0800460c 	.word	0x0800460c
+ 80037c0:	0800460c 	.word	0x0800460c
+ 80037c4:	0800460c 	.word	0x0800460c
+ 80037c8:	08004610 	.word	0x08004610
 
 080037cc <__retarget_lock_init_recursive>:
  80037cc:	4770      	bx	lr
@@ -8751,11 +8751,11 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  8003c58:	f000 f9b8 	bl	8003fcc <_printf_i>
  8003c5c:	e7ee      	b.n	8003c3c <_svfiprintf_r+0x1b8>
  8003c5e:	bf00      	nop
- 8003c60:	080045cc 	.word	0x080045cc
- 8003c64:	080045d6 	.word	0x080045d6
+ 8003c60:	080045d0 	.word	0x080045d0
+ 8003c64:	080045da 	.word	0x080045da
  8003c68:	00000000 	.word	0x00000000
  8003c6c:	080039c5 	.word	0x080039c5
- 8003c70:	080045d2 	.word	0x080045d2
+ 8003c70:	080045d6 	.word	0x080045d6
 
 08003c74 <__sfputc_r>:
  8003c74:	6893      	ldr	r3, [r2, #8]
@@ -9020,11 +9020,11 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  8003ed4:	f000 f87a 	bl	8003fcc <_printf_i>
  8003ed8:	e7e5      	b.n	8003ea6 <_vfiprintf_r+0x1de>
  8003eda:	bf00      	nop
- 8003edc:	080045cc 	.word	0x080045cc
- 8003ee0:	080045d6 	.word	0x080045d6
+ 8003edc:	080045d0 	.word	0x080045d0
+ 8003ee0:	080045da 	.word	0x080045da
  8003ee4:	00000000 	.word	0x00000000
  8003ee8:	08003ca3 	.word	0x08003ca3
- 8003eec:	080045d2 	.word	0x080045d2
+ 8003eec:	080045d6 	.word	0x080045d6
 
 08003ef0 <_printf_common>:
  8003ef0:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
@@ -9358,8 +9358,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  8004208:	f104 0619 	add.w	r6, r4, #25
  800420c:	e7f5      	b.n	80041fa <_printf_i+0x22e>
  800420e:	bf00      	nop
- 8004210:	080045dd 	.word	0x080045dd
- 8004214:	080045ee 	.word	0x080045ee
+ 8004210:	080045e1 	.word	0x080045e1
+ 8004214:	080045f2 	.word	0x080045f2
 
 08004218 <__sflush_r>:
  8004218:	f9b1 200c 	ldrsh.w	r2, [r1, #12]
