@@ -177,32 +177,6 @@ int main(void)
 
 	printf("\n\nStarting I2C1\r\n");
 
-	// This prints all the addresses (in hex) of everything on the I2C thing that is activated.
-//	for (uint8_t i = 0; i < 128; i++)
-//	{
-//		if (HAL_I2C_IsDeviceReady(&hi2c1, (uint16_t) (i << 1), 3, 5) == HAL_OK)
-//		{
-//			printf("%2x ", i);
-//		}
-//		else
-//		{
-//			printf("-- ");
-//		}
-//
-//		if (i > 0 && (i + 1) % 16 == 0)
-//			printf("\n");
-//	}
-
-//printf("\n\nScan Complete\n");
-
-	//char *str = "Hello";
-
-	printf("\n\nSending Data...\r\n");
-	// HAL_I2C_Master_Transmit(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout)
-	//HAL_I2C_Master_Transmit(&hi2c1, (uint16_t)0x27 << 1, (uint8_t *)"Hello", 6, 5);
-	//printf("\n\nData Sent.\r\n");
-
-
 	lcd_init();
 	lcd_print("Hello");
 
