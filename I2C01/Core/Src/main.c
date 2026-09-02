@@ -70,6 +70,7 @@ static void lcd_write_nibble(uint8_t nibble, uint8_t rs)
 	uint8_t data = LCD_BL | rs | (nibble << 4);
 	uint8_t buf[2] =
 	{ data | LCD_EN, data };
+
 	HAL_I2C_Master_Transmit(&hi2c1, LCD_ADDR, buf, 2, 100);
 }
 
@@ -103,6 +104,18 @@ static void lcd_init(void)
 	HAL_Delay(2);
 	lcd_write_byte(0x06, 0);  // Entry mode: increment, no shift
 	lcd_write_byte(0x0C, 0);  // Display on, cursor off
+}
+
+static void lcd_clear()
+{
+	lcd_write_byte(0x01, 0);  // RS=0 → command
+	HAL_Delay(2);
+}
+
+static void lcd_set_cursor(uint8_t line, uint8_t col)
+{
+    uint8_t addr = (line == 0) ? col : (0x40 + col);
+    lcd_write_byte(0x80 | addr, 0);
 }
 
 static void lcd_print(const char *str)
@@ -178,7 +191,6 @@ int main(void)
 	printf("\r\n\r\n\r\nStarting I2C 01...\r\n");
 
 	lcd_init();
-	lcd_print("Hello");
 
 	/* USER CODE END 2 */
 
@@ -189,6 +201,7 @@ int main(void)
 	uint32_t loop_cnt = 0;
 	uint32_t next_blink = 500;
 	uint32_t next_tick = 1000;
+	char buf[128];
 
 	while (1)
 	{
@@ -206,9 +219,11 @@ int main(void)
 		{
 			printf("Tick: %lu (Loop Count: %lu)\r\n", now / 1000, loop_cnt);
 
-			char buf[128];
-			int name_len = snprintf(buf, sizeof(buf), "Tick: %lu (Loop Count: %lu)\r\n", now / 1000, loop_cnt);
-
+			lcd_clear();
+			snprintf(buf, sizeof(buf), "Tick: %lu", now / 1000);
+			lcd_print(buf);
+			lcd_set_cursor(1,0);
+			snprintf(buf, sizeof(buf), "Loop Count: %lu", loop_cnt);
 			lcd_print(buf);
 
 			loop_cnt = 0;
