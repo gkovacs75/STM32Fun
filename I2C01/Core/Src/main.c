@@ -67,48 +67,50 @@ static void MX_I2C1_Init(void);
 // Single nibble with EN pulse (used for init)
 static void lcd_write_nibble(uint8_t nibble, uint8_t rs)
 {
-    uint8_t data = LCD_BL | rs | (nibble << 4);
-    uint8_t buf[2] = { data | LCD_EN, data };
-    HAL_I2C_Master_Transmit(&hi2c1, LCD_ADDR, buf, 2, 100);
+	uint8_t data = LCD_BL | rs | (nibble << 4);
+	uint8_t buf[2] =
+	{ data | LCD_EN, data };
+	HAL_I2C_Master_Transmit(&hi2c1, LCD_ADDR, buf, 2, 100);
 }
 
 // Full byte in 4-bit mode: two nibbles, each with EN pulse
 static void lcd_write_byte(uint8_t byte, uint8_t rs)
 {
-    lcd_write_nibble((byte >> 4) & 0x0F, rs);
-    lcd_write_nibble(byte & 0x0F, rs);
+	lcd_write_nibble((byte >> 4) & 0x0F, rs);
+	lcd_write_nibble(byte & 0x0F, rs);
 }
 
 static void lcd_init(void)
 {
-    HAL_Delay(50);  // wait for LCD power-on stabilization
+	HAL_Delay(50);  // wait for LCD power-on stabilization
 
-    // Send 0x3 three times (upper nibble only, single EN pulse)
-    lcd_write_nibble(0x3, 0);
-    HAL_Delay(5);
-    lcd_write_nibble(0x3, 0);
-    HAL_Delay(1);
-    lcd_write_nibble(0x3, 0);
-    HAL_Delay(1);
+	// Send 0x3 three times (upper nibble only, single EN pulse)
+	lcd_write_nibble(0x3, 0);
+	HAL_Delay(5);
+	lcd_write_nibble(0x3, 0);
+	HAL_Delay(1);
+	lcd_write_nibble(0x3, 0);
+	HAL_Delay(1);
 
-    // Send 0x2 to switch to 4-bit mode
-    lcd_write_nibble(0x2, 0);
-    HAL_Delay(1);
+	// Send 0x2 to switch to 4-bit mode
+	lcd_write_nibble(0x2, 0);
+	HAL_Delay(1);
 
-    // Now in 4-bit mode — send full commands (two nibbles each)
-    lcd_write_byte(0x28, 0);  // Function set: 4-bit, 2 lines, 5x8
-    lcd_write_byte(0x08, 0);  // Display off
-    lcd_write_byte(0x01, 0);  // Clear display
-    HAL_Delay(2);
-    lcd_write_byte(0x06, 0);  // Entry mode: increment, no shift
-    lcd_write_byte(0x0C, 0);  // Display on, cursor off
+	// Now in 4-bit mode — send full commands (two nibbles each)
+	lcd_write_byte(0x28, 0);  // Function set: 4-bit, 2 lines, 5x8
+	lcd_write_byte(0x08, 0);  // Display off
+	lcd_write_byte(0x01, 0);  // Clear display
+	HAL_Delay(2);
+	lcd_write_byte(0x06, 0);  // Entry mode: increment, no shift
+	lcd_write_byte(0x0C, 0);  // Display on, cursor off
 }
 
 static void lcd_print(const char *str)
 {
-    while (*str) {
-        lcd_write_byte(*str++, LCD_RS);  // RS=1 → data
-    }
+	while (*str)
+	{
+		lcd_write_byte(*str++, LCD_RS);  // RS=1 → data
+	}
 }
 
 int _write(int file, char *ptr, int len)
@@ -175,11 +177,8 @@ int main(void)
 	/* USER CODE BEGIN 2 */
 	printf("\r\n\r\n\r\nStarting I2C 01...\r\n");
 
-	printf("\n\nStarting I2C1\r\n");
-
 	lcd_init();
 	lcd_print("Hello");
-
 
 	/* USER CODE END 2 */
 
@@ -205,7 +204,12 @@ int main(void)
 
 		if (now >= next_tick)
 		{
-			//printf("Tick: %lu (Loop Count: %lu)\r\n", now / 1000, loop_cnt);
+			printf("Tick: %lu (Loop Count: %lu)\r\n", now / 1000, loop_cnt);
+
+			char buf[128];
+			int name_len = snprintf(buf, sizeof(buf), "Tick: %lu (Loop Count: %lu)\r\n", now / 1000, loop_cnt);
+
+			lcd_print(buf);
 
 			loop_cnt = 0;
 
